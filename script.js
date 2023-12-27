@@ -8,7 +8,10 @@ typeInput.addEventListener("input", () => {
   //console.log(sentenceArray);
   const arrayValue = typeInput.value.split("");
   sentenceArray.forEach((characterSpan, index) => {
-    if(characterSpan.innerText == arrayValue[index]) {
+    if((arrayValue[index] == null)) {
+      characterSpan.classList.remove("correct");
+      characterSpan.classList.remove( "incorrect");
+    }else if(characterSpan.innerText == arrayValue[index]) {
       characterSpan.classList.add("correct");
       characterSpan.classList.remove( "incorrect");
     }else{
@@ -39,8 +42,8 @@ async function RenderNextSentence() {
     characterSpan.innerText = character;
     //conso le.log(characterSpan);
     typeDisplay.appendChild(characterSpan);
-
-    characterSpan.classList.add("correct")
+    
+    //characterSpan.classList.add("correct")
   });
 
   /* テキストボックス内更新（クリアにする） */
