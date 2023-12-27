@@ -1,6 +1,7 @@
 const RANDOM_SENTENCE_URL_API = "https://api.quotable.io/random";
 const typeDisplay = document.getElementById("typeDisplay");
 const typeInput = document.getElementById("typeInput");
+const timer = document.getElementById("timer")
 
 /* テキストボックスと問題文の合致を判定 */
 typeInput.addEventListener("input", () => {
@@ -47,7 +48,34 @@ async function RenderNextSentence() {
   });
 
   /* テキストボックス内更新（クリアにする） */
-  typeInput.innerText = "";
+  typeInput.value = "";
+
+  /* タイマー機能 */
+  Timer();
+}
+
+let countTime;
+let originTime = 30;
+
+function Timer(){
+  timer.innerText = originTime;
+  countTime = new Date();
+  //console.log(countTime);
+
+  /* 1000は1000ミリ秒を表す */
+  setInterval(() => {
+    timer.innerText = originTime - getTimerTime();
+    if(timer.innerText <= 0) TimeUp();
+  }, 1000)
+}
+
+function getTimerTime() {
+   /* 小数点切り捨てでカウントするようにする */
+   return Math.floor((new Date() - countTime) / 1000); 
+}
+
+function TimeUp() {
+  RenderNextSentence();
 }
 
 RenderNextSentence();
