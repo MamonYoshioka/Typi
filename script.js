@@ -11,7 +11,21 @@ async function RenderNextSentence() {
   const sentence = await GetRandomSentence();
   console.log(sentence);
   
-  typeDisplay.innerText = sentence;
+  typeDisplay.innerText = "";
+
+  /* 文字を1文字ずつ判別していく */
+  let word = sentence.split("");
+  //console.log(word);
+
+  word.forEach((character) => {
+    const characterSpan = document.createElement("span");
+    characterSpan.innerText = character;
+    //conso le.log(characterSpan);
+    typeDisplay.appendChild(characterSpan);
+
+    characterSpan.classList.add("correct")
+  });
+
 }
 
 RenderNextSentence();
